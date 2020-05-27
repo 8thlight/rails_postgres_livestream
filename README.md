@@ -1,20 +1,18 @@
 # Rails Postgres Livestream
 
-Courtesty of Rails Example App
+This app was adopted from the [Rails Example App](https://github.com/gothinkster/rails-realworld-example-app).
 
-> Example Rails codebase that adheres to the [RealWorld](https://github.com/gothinkster/realworld-example-apps) API spec.
+## Project Setup
 
-This repo is functionality complete -- PRs and issues welcome!
+Clone the repo and run the following commands to set up the project:
 
-# Getting started
+```
+bundle install
+bundle exec rails db:setup
+bundle exec rails db:seed
+```
 
-To get the Rails server running locally:
-
-- Clone this repo
-- `bundle install` to install all req'd dependencies
-- `rails s` to start the local server
-
-
+You can then run `bundle exec rails s` to start the local server.
 
 # Code Overview
 
@@ -25,14 +23,6 @@ To get the Rails server running locally:
 - [Devise](https://github.com/plataformatec/devise) - For implementing authentication
 - [Jbuilder](https://github.com/rails/jbuilder) - Default JSON rendering gem that ships with Rails, used for making reusable templates for JSON output.
 - [JWT](https://github.com/jwt/ruby-jwt) - For generating and validating JWTs for authentication
-
-## Folders
-
-- `app/models` - Contains the database models for the application where we can define methods, validations, queries, and relations to other models.
-- `app/views` - Contains templates for generating the JSON output for the API
-- `app/controllers` - Contains the controllers where requests are routed to their actions, where we find and manipulate our models and return them for the views to render.
-- `config` - Contains configuration files for our Rails application and for our database, along with an `initializers` folder for scripts that get run on boot.
-- `db` - Contains the migrations needed to create our database schema.
 
 ## Configuration
 
