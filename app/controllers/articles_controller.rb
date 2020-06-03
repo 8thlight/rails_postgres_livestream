@@ -13,7 +13,7 @@ class ArticlesController < ApplicationController
     @articles_count = @articles.count
     @tags_count = @articles.map{ |a| a.tags }.flatten.uniq.length
 
-    @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
+    @articles = @articles.sort_by(&:created_at).take(params[:limit].to_i || 20)
   end
 
   def feed
