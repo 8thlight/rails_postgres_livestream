@@ -5,3 +5,4 @@ json.articles do |json|
 end
 
 json.articles_count @articles_count
+json.tags_count @tags_count

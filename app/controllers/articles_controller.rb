@@ -4,13 +4,14 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @articles = Article.all.includes(:user)
+    @articles = Article.all
 
     @articles = @articles.tagged_with(params[:tag]) if params[:tag].present?
     @articles = @articles.authored_by(params[:author]) if params[:author].present?
     @articles = @articles.favorited_by(params[:favorited]) if params[:favorited].present?
 
     @articles_count = @articles.count
+    @tags_count = @articles.map{ |a| a.tags }.flatten.uniq.length
 
     @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
   end
