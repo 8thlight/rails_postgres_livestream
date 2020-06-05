@@ -6,7 +6,10 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.all
 
-    @articles = @articles.tagged_with(params[:tag]) if params[:tag].present?
+    if params[:tag].present?
+      @articles = @articles.select { |article| article.tag_list.include?(params[:tag]) }
+    end
+
     @articles = @articles.authored_by(params[:author]) if params[:author].present?
     @articles = @articles.favorited_by(params[:favorited]) if params[:favorited].present?
 
@@ -14,6 +17,8 @@ class ArticlesController < ApplicationController
     @tags_count = @articles.map{ |a| a.tags }.flatten.uniq.length
 
     @articles = @articles.sort_by(&:created_at).take(params[:limit].to_i || 20)
+
+    @positivity_statistic = calculate_positivity_statistic()
   end
 
   def feed
@@ -69,5 +74,11 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :body, :description, tag_list: [])
+  end
+
+  def calculate_positivity_statistic()
+    sql = "select * from articles as a where a.body like '%give%'"
+
+    ActiveRecord::Base.connection.exec_query(sql)
   end
 end

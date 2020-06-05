@@ -13,6 +13,12 @@ article_3 = Article.create(title: "How to Groom Your Elephant", body: "Use a hos
 article_3.tag_list.add("elephants", "peanuts", "grooming")
 article_3.save
 
+# 5000.times do
+#   a = Article.create(title: "How to Groom Your Puppy", body: "Use a brush, give lots of belly rubs.", description: "Step by step instructions on how to groom your puppy.", user: user_1)
+#   a.tag_list.add("dogs", "puppers", "puppies", "belly rubs", "grooming", "love")
+#   a.save
+# end
+
 Favorite.create(article: article_1, user: user_1)
 Favorite.create(article: article_2, user: user_1)
 Favorite.create(article: article_2, user: user_2)
